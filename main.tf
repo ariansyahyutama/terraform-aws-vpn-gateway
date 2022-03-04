@@ -9,9 +9,9 @@ locals {
 
   create_tunnel_with_internal_cidr_only = local.internal_cidr_provided && local.preshared_key_not_provided
   create_tunnel_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
-
+  connection_name = var.connection-name
   connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
-  name_tag              = "VPN Connection ${var.connection-name} and CG ${var.customer_gateway_id}"
+  name_tag              = "${var.connection-name} - VPN Connection between ${var.connection_identifier} and ${var.customer_gateway_id}"
 }
 
 ### Fully AWS managed
@@ -76,7 +76,7 @@ resource "aws_vpn_connection" "default" {
 
   tags = merge(
     {
-      "Name" = var.connection-name #local.name_tag
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -147,7 +147,7 @@ resource "aws_vpn_connection" "tunnel" {
 
   tags = merge(
     {
-      "Name" = var.connection-name #local.name_tag
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -215,7 +215,7 @@ resource "aws_vpn_connection" "preshared" {
 
   tags = merge(
     {
-      "Name" = var.connection-name #local.name_tag
+      "Name" = local.name_tag
     },
     var.tags,
   )
@@ -286,7 +286,7 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tags = merge(
     {
-      "Name" = var.connection-name #local.name_tag
+      "Name" = local.name_tag
     },
     var.tags,
   )
