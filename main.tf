@@ -147,7 +147,7 @@ resource "aws_vpn_connection" "tunnel" {
 
   tags = merge(
     {
-      "Name" = var.connetion-name #local.name_tag
+      "Name" = var.connection-name #local.name_tag
     },
     var.tags,
   )
