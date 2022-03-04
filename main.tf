@@ -215,7 +215,7 @@ resource "aws_vpn_connection" "preshared" {
 
   tags = merge(
     {
-      "Name" = local.name_tag
+      "Name" = var.connection-name #local.name_tag
     },
     var.tags,
   )
@@ -286,7 +286,7 @@ resource "aws_vpn_connection" "tunnel_preshared" {
 
   tags = merge(
     {
-      "Name" = local.name_tag
+      "Name" = var.connection-name #local.name_tag
     },
     var.tags,
   )
