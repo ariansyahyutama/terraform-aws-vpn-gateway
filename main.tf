@@ -76,7 +76,7 @@ resource "aws_vpn_connection" "default" {
 
   tags = merge(
     {
-      "Name" = local.name_tag
+      "Name" = var.connectionn-name #local.name_tag
     },
     var.tags,
   )
