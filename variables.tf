@@ -292,3 +292,9 @@ variable "remote_ipv4_network_cidr" {
   type        = string
   default     = "0.0.0.0/0"
 }
+
+variable "connection-name" {
+  description = "connection name for vpn connection"
+  type        = string
+  default = ""
+}
