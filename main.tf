@@ -299,12 +299,35 @@ resource "aws_vpn_gateway_attachment" "default" {
   vpn_gateway_id = var.vpn_gateway_id
 }
 
+/*
 resource "aws_vpn_gateway_route_propagation" "private_subnets_vpn_routing" {
   count = var.create_vpn_connection && !var.connect_to_transit_gateway ? var.vpc_subnet_route_table_count : 0
 
   vpn_gateway_id = var.vpn_gateway_id
   route_table_id = element(var.vpc_subnet_route_table_ids, count.index)
+}*/
+
+resource "aws_vpn_gateway_route_propagation" "rtb_data_ids" {
+  count = var.create_vpn_connection && !var.connect_to_transit_gateway ? var.rtb_data_ids_count : 0   #vpc_subnet_route_table_count : 0
+
+  vpn_gateway_id = var.vpn_gateway_id
+  route_table_id = element(var.rtb_data_ids, count.index)
 }
+
+resource "aws_vpn_gateway_route_propagation" "rtb_app_ids" {
+  count = var.create_vpn_connection && !var.connect_to_transit_gateway ? var.rtb_app_ids_count : 0    #var.vpc_subnet_route_table_count : 0
+
+  vpn_gateway_id = var.vpn_gateway_id
+  route_table_id = element(var.rtb_app_ids, count.index)
+}
+
+resource "aws_vpn_gateway_route_propagation" "rtb_public_ids" {
+  count = var.create_vpn_connection && !var.connect_to_transit_gateway ? var.rtb_public_ids_count : 0 #var.vpc_subnet_route_table_count : 0
+
+  vpn_gateway_id = var.vpn_gateway_id
+  route_table_id = element(var.rtb_public_ids, count.index)
+}
+
 
 resource "aws_vpn_connection_route" "default" {
   count = var.create_vpn_connection && var.vpn_connection_static_routes_only && !var.connect_to_transit_gateway ? length(var.vpn_connection_static_routes_destinations) : 0

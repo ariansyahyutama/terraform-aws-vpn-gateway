@@ -27,6 +27,7 @@ variable "vpc_id" {
   default     = null
 }
 
+/*
 variable "vpc_subnet_route_table_ids" {
   description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated."
   type        = list(string)
@@ -37,6 +38,40 @@ variable "vpc_subnet_route_table_ids" {
 # https://github.com/hashicorp/terraform/issues/10857
 variable "vpc_subnet_route_table_count" {
   description = "The number of subnet route table ids being passed in via `vpc_subnet_route_table_ids`."
+  type        = number
+  default     = 0
+}
+*/
+variable "rtb_data_ids" {
+  description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated."
+  type        = list(string)
+  default     = []
+}
+
+variable "rtb_app_ids" {
+  description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated."
+  type        = list(string)
+  default     = []
+}
+
+variable "rtb_public_ids" {
+  description = "The ids of the VPC subnets for which routes from the VPN Gateway will be propagated."
+  type        = list(string)
+  default     = []
+}
+
+variable "rtb_data_ids_count" {
+  description = "The number of subnet route table ids being passed in via `rtb_data_ids_count`."
+  type        = number
+  default     = 0
+}
+variable "rtb_app_ids_count" {
+  description = "The number of subnet route table ids being passed in via `rtb_app_ids_count`."
+  type        = number
+  default     = 0
+}
+variable "rtb_public_ids_count" {
+  description = "The number of subnet route table ids being passed in via `rtb_public_ids_count`."
   type        = number
   default     = 0
 }
