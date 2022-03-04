@@ -11,7 +11,7 @@ locals {
   create_tunnel_with_preshared_key_only = local.internal_cidr_not_provided && local.preshared_key_provided
   connection_name = var.connection-name
   connection_identifier = var.connect_to_transit_gateway ? "TGW ${var.transit_gateway_id}" : "VPC ${var.vpc_id}"
-  name_tag              = "${var.connection-name} - VPN Connection between ${var.connection_identifier} and ${var.customer_gateway_id}"
+  name_tag              = "${local.connection-name} - VPN Connection between ${local.connection_identifier} and ${var.customer_gateway_id}"
 }
 
 ### Fully AWS managed
